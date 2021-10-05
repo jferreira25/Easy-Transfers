@@ -1,0 +1,55 @@
+version: '3.6'
+
+services:
+  elasticsearch:
+   container_name: elasticsearch
+   image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
+   ports:
+    - 9200:9200
+   volumes:
+    - elasticsearch-data:/usr/share/elasticsearch/data
+   environment:
+    - xpack.monitoring.enabled=true
+    - xpack.watcher.enabled=false
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    - discovery.type=single-node
+    - ELASTICSEARCH_USERNAME=elastic
+    - ELASTICSEARCH_PASSWORD=Acesso
+   networks:
+    - elastic
+
+  kibana:
+   container_name: kibana
+   image: docker.elastic.co/kibana/kibana:7.13.4
+   ports:
+    - 5601:5601
+   depends_on:
+    - elasticsearch
+   environment:
+    - ELASTICSEARCH_URL=http://localhost:9200
+    - ELASTICSEARCH_USERNAME=elastic
+    - ELASTICSEARCH_PASSWORD=Acesso
+   networks:
+    - elastic
+  rabbitmq:
+   image: rabbitmq:3-management
+   container_name: rabbitmq
+   hostname: rabbitmq
+   ports:
+     - 5672:5672
+     - 15672:15672
+   volumes:
+     - $PWD/storage/rabbitmq3:/var/lib/rabbitmq
+   environment:
+    - RABBITMQ_ERLANG_COOKIE=This_is_my_secret_phrase
+    - RABBITMQ_DEFAULT_USER=guest
+    - RABBITMQ_DEFAULT_PASS=guest
+    - CLUSTERED=true
+   networks:
+    - elastic    
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  elasticsearch-data:

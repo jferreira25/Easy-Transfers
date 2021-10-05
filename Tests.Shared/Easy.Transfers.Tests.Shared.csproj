@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.6.0" />
+    <PackageReference Include="Moq" Version="4.11.0" />
+    <PackageReference Include="AutoFixture" Version="4.11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Easy.Transfers.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mock\Domain\Entities\" />
+  </ItemGroup>
+
+</Project>

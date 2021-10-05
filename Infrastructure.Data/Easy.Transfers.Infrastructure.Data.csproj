@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\junior.ferreira\.nuget\packages\microsoft.azure.cosmos\3.20.0\contentFiles\any\netstandard2.0\ThirdPartyNotice.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Dapper.ParameterExtensions" Version="2018.12.7.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrossCutting.Configuration\Easy.Transfers.CrossCutting.Configuration.csproj" />
+    <ProjectReference Include="..\Domain\Easy.Transfers.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
